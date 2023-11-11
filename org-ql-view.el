@@ -243,8 +243,7 @@ See info node `(elisp)Cyclic Window Ordering'."
 Interactively, prompt for NAME."
   (interactive (list (completing-read "View: " (mapcar #'car org-ql-views))))
   (let* ((view (alist-get name org-ql-views nil nil #'string=))
-         (window (--find (string-prefix-p org-ql-view-buffer-name-prefix (buffer-name (window-buffer it)))
-                         (window-list)))
+         (window (selected-window))
          (org-ql-view-display-buffer-action (when (and window (not org-ql-view-display-buffer-action))
                                               (cons #'display-buffer-same-window nil))))
     (when window
